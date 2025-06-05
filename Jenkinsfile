@@ -1,23 +1,10 @@
 pipeline {
     agent any
     stages {
-                        
-            stage("Checkout Code") {
-                steps {
-                checkout scm
-                }
-            }
-         
-            stage('task') {
-                steps {
-                     sh "ls"
-                }
-            }
-
-            stage("master task") {
-                when {
-                    not {
-                        anyof {
+        stage("master task") {
+            when {
+                not {
+                    anyof {
                             branch 'dev';
                             branch 'test'
                         }
@@ -25,26 +12,26 @@ pipeline {
                 }
                 steps {
                     sh 'ls'
-                    sh ' echo "hello master" '
+                    echo "hello master"
                 }
-            }
+         }
 
-            stage("dev task") {
-                when {
-                    branch 'dev'
-                }
-                steps {
-                    sh 'ls'
-                    sh ' echo "hello dev" '
-                }
+        stage("dev task") {
+             when {
+                 branch 'dev'
+             }
+             steps {
+                 sh 'ls'
+                 echo "hello dev"
+             }
             }
-            stage("test task") {
-                when {
-                    branch 'test'
-                }
-                steps {
-                    sh 'ls'
-                    sh ' echo "hello test" '
+        stage("test task") {
+            when {
+                branch 'test'
+            }
+            steps {
+                sh 'ls'
+                echo "hello test"
                 }
             }
     }
