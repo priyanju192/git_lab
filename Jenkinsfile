@@ -1,20 +1,7 @@
 pipeline {
     agent any
-    stages {
-                        
-            stage("Checkout Code") {
-                steps {
-                checkout scm
-                }
-            }
-         
-            stage('task') {
-                steps {
-                     sh "ls"
-                }
-            }
-
-            stage("master task") {
+    stages {     
+        stage("master task") {
                 when {
                     not {
                         anyof {
@@ -25,7 +12,7 @@ pipeline {
                 }
                 steps {
                     sh 'ls'
-                    sh ' echo "hello master" '
+                    echo "hello master"
                 }
             }
 
@@ -35,7 +22,7 @@ pipeline {
                 }
                 steps {
                     sh 'ls'
-                    sh ' echo "hello dev" '
+                    echo "hello dev"
                 }
             }
             stage("test task") {
@@ -44,7 +31,7 @@ pipeline {
                 }
                 steps {
                     sh 'ls'
-                    sh ' echo "hello test" '
+                    echo "hello test"
                 }
             }
     }
